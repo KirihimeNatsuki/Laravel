@@ -14,6 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('admin_area', ['middleware' => 'admin', function () {
+    //
+}]);
 
 Route::get('liste', 'ListUsers@index');
 
@@ -22,3 +25,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('skills','SkillsController');
+
+Route::resource('skills_user','UserSkillsController');

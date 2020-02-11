@@ -17,7 +17,8 @@
                     You are logged in!
                 </div>
                 <div class="pull-left">
-                  <a class="btn btn-primary" href="{{ route('skills.index') }}"> Voir toutes les competences</a>
+                  <a class="btn btn-primary" href="{{ route('skills.index') }}">Voir toutes les competences</a>
+                  <a class="btn btn-primary" href="{{ route('skills_user.index') }}">Voir vos competences</a>
                 </div>
             </div>
         </div>

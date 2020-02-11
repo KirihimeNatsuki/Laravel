@@ -6,7 +6,7 @@
                 <h2>Vos competences</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('skills.create') }}">Ajouter nouvelle competence</a>
+                <a class="btn btn-success" href="{{ route('skills_user.create') }}">Ajouter nouvelle competence</a>
             </div>
         </div>
     </div>
@@ -25,17 +25,18 @@
             <th>Logo</th>
             <th width="280px">Action</th>
         </tr>
-        @foreach ($skills as $skills)
+        @foreach ($skills_user as $skills)
         <tr>
             <td>{{ ++$i }}</td>
             <td>{{ $skills->name }}</td>
             <td>{{ $skills->description }}</td>
             <td>{{ $skills->logo }}</td>
             <td>
-                <form action="{{ route('skills.destroy',$skills->id) }}" method="POST">
-    
-                    <a class="btn btn-primary" href="{{ route('skills.edit',$skills->id) }}">Edit</a>
+                  <a class="btn btn-primary" href="{{ route('skills_user.edit', $skills->id) }}">Edit</a>
    
+                <form action="{{ route('skills_user.destroy',$skills->id) }}" method="POST">
+    
+                    
                     @csrf
                     @method('DELETE')
       

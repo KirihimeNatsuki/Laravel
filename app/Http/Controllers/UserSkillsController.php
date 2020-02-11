@@ -1,11 +1,15 @@
 <?php
-  
+
 namespace App\Http\Controllers;
-  
+
 use App\Skill;
+use App\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-  
-class SkillsController extends Controller
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
+
+class UserSkillsController extends Controller
 {
     /**
      * Display a listing of the skills.
@@ -14,12 +18,13 @@ class SkillsController extends Controller
      */
     public function index()
     {
-        $skills = Skill::latest()->paginate(10);
-  
-        return view('skills.index',compact('skills'))
+        $skills_user = Auth::user()->skills()->paginate(5);
+
+        return view('skills_user.index',compact('skills_user'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
+        
     }
-   
+      
     /**
      * Show the form for creating a new skills.
      *
@@ -27,7 +32,8 @@ class SkillsController extends Controller
      */
     public function create()
     {
-        return view('skills.create');
+        $skills = Skill::all();
+        return view('skills_user.create', compact('skills'));
     }
   
     /**
@@ -41,12 +47,13 @@ class SkillsController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'logo',
+            'level' => 'required',
+            
         ]);
   
-        Skill::create($request->all());
+        DB::table('skill_user')->join('skills', 'skill_user.skill_id', '=', 'skills.id')->insert(['skill_id' => $request->name, 'user_id' => Auth::user()->id, 'level' => $request->level]);
    
-        return redirect()->route('skills.index')
+        return redirect()->route('skills_user.index')
                         ->with('success','Competence ajoutee avec succes !');
     }
    
@@ -58,7 +65,7 @@ class SkillsController extends Controller
      */
     public function show(Skill $skill)
     {
-        return view('skills.show',compact('skill'));
+        return view('skills_user.show',compact('skill'));
     }
    
     /**
@@ -69,7 +76,7 @@ class SkillsController extends Controller
      */
     public function edit(Skill $skill)
     {
-        return view('skills.edit',compact('skill'));
+      return view('skills_user.edit',['skill'=> $skill]);
     }
   
     /**
@@ -84,13 +91,13 @@ class SkillsController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'logo',
+            'level' => 'required',
         ]);
   
-        $skill->update($request->all());
+        DB::table('skill_user')->join('skills', 'skill_user.skill_id', '=', 'skills.id')->update(['skill_id' => $request->name, 'user_id' => Auth::user()->id, 'level' => $request->level]);
   
-        return redirect()->route('skills.index')
-                        ->with('success','Competence mis à jour avec succes !');
+        return redirect()->route('skills_user.index')
+                        ->with('success','Compétence mis à jour avec succes !');
     }
   
     /**
@@ -103,7 +110,7 @@ class SkillsController extends Controller
     {
         $skill->delete();
   
-        return redirect()->route('skills.index')
+        return redirect()->route('skills_user.index')
                         ->with('success','Competence supprimee avec succes !');
     }
 }
