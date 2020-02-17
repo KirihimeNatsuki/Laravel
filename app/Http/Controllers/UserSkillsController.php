@@ -46,7 +46,6 @@ class UserSkillsController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'description' => 'required',
             'level' => 'required',
             
         ]);
@@ -76,7 +75,7 @@ class UserSkillsController extends Controller
      */
     public function edit(Skill $skill)
     {
-      return view('skills_user.edit',['skill'=> $skill]);
+      return view('skills_user.edit', compact('skill'));
     }
   
     /**
@@ -89,8 +88,6 @@ class UserSkillsController extends Controller
     public function update(Request $request, Skill $skill)
     {
         $request->validate([
-            'name' => 'required',
-            'description' => 'required',
             'level' => 'required',
         ]);
   

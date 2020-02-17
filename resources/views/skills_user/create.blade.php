@@ -38,12 +38,6 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Description:</strong>
-                <textarea class="form-control" style="height:150px" name="description" placeholder="Description"></textarea>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
                 <strong>Niveau:</strong>
                 <select name="level">
                   <option value="1" name="1" selected>1</option> 
@@ -52,12 +46,6 @@
                   <option value="4" name="4">4</option> 
                   <option value="5" name="5">5</option>
                 </select>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Logo:</strong>
-                <input type="text" name="logo" class="form-control" placeholder="Logo">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

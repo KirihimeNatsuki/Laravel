@@ -20,17 +20,19 @@
     <table class="table table-bordered">
         <tr>
             <th>No</th>
-            <th>Name</th>
+            <th>Nom</th>
             <th>Description</th>
+            <th>Niveau</th>
             <th>Logo</th>
-            <th width="280px">Action</th>
+            <th width="280px">Actions</th>
         </tr>
         @foreach ($skills_user as $skills)
         <tr>
             <td>{{ ++$i }}</td>
             <td>{{ $skills->name }}</td>
             <td>{{ $skills->description }}</td>
-            <td>{{ $skills->logo }}</td>
+            <td>{{ $skills->pivot->level }}</td>
+            <td><img src="{{asset('images/' . $skills->logo)}}" class="img-thumbnail" width="75" /></td>
             <td>
                   <a class="btn btn-primary" href="{{ route('skills_user.edit', $skills->id) }}">Edit</a>
    

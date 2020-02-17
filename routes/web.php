@@ -26,4 +26,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('skills','SkillsController');
 
-Route::resource('skills_user','UserSkillsController');
+Route::resource('skills_user','UserSkillsController')->middleware('auth');
+
+/*Route::resource('skills', 'SkillsController')->except([
+      'show', 'index',
+])->middleware('can:manage', $skills);
+
+Route::resource('skills', 'SkillsController')->only(['show'])->middleware('can:view', $skills);*/

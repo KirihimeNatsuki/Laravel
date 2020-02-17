@@ -41,10 +41,19 @@ class SkillsController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'logo',
+            'logo' =>  'required|image|max:2048',
         ]);
-  
-        Skill::create($request->all());
+        
+        $logo = $request->file('logo');
+        $extension = $logo->getClientOriginalExtension();
+        $new_name = time() . '.' . $extension;
+        $logo->move(public_path('/images/'), $new_name);
+        
+        Skill::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'logo' => $new_name,
+            ]);
    
         return redirect()->route('skills.index')
                         ->with('success','Competence ajoutee avec succes !');
@@ -80,14 +89,33 @@ class SkillsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Skill $skill)
-    {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'logo',
-        ]);
+    {    
+        $logo_name = $request->hidden_image;
+        $logo = $request->file('logo');
+        if($logo != '')
+        {
+            $request->validate([
+                'name' => 'required',
+                'description' => 'required',
+                'logo' =>  'required|image|max:2048',
+            ]);
+            $extension = $logo->getClientOriginalExtension();
+            $logo_name = time() . '.' . $extension;
+            $logo->move(public_path('/images/'), $logo_name);
+        }
+        else
+        {
+            $request->validate([
+                'name' => 'required',
+                'description' => 'required',
+            ]);
+        }
   
-        $skill->update($request->all());
+        $skill->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'logo' => $logo_name,
+            ]);
   
         return redirect()->route('skills.index')
                         ->with('success','Competence mis à jour avec succes !');

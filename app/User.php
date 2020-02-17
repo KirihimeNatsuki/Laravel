@@ -39,7 +39,15 @@ class User extends Authenticatable
     
     public function skills()
     {
-        //return $this->belongsToMany('App\Skill')->withPivot('level');
         return $this->belongsToMany('App\Skill')->withPivot('level');
+    }
+    
+    public function role() {
+        return $this->belongsToMany('App\Role');
+    }
+
+
+    public static function userRole($user) {
+        return $user->role;
     }
 }

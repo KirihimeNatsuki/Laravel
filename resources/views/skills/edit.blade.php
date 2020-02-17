@@ -22,7 +22,7 @@
         </div>
     @endif
   
-    <form action="{{ route('skills.update',$skill->id) }}" method="POST">
+    <form action="{{ route('skills.update',$skill->id) }}" method="POST" enctype= "multipart/form-data">
         @csrf
         @method('PUT')
    
@@ -42,7 +42,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Logo:</strong>
-                    <input type="text" name="logo" value="{{ $skill->logo }}" class="form-control" placeholder="Logo">
+                    <input type="file" name="logo" value="{{ $skill->logo }}" class="form-control" placeholder="Logo">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
