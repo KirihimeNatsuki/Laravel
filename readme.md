@@ -1,3 +1,9 @@
+La partie liste des utilisateurs doit être entrée dans l'url directement.
+Tous les utilisateurs sont administrateurs.
+Les premiers skills fournis dans la base n'ont pas d'images et donc rien ne sera affiché, pour cela il faut créer un nouveau skill pour voir l'image s'afficher correctement.
+Il est possible que certains bugs apparaissent mais le seul que j'ai rencontré sans pouvoir le résoudre est celui de la blade skills_user/edit.blade.php (il ne s'agit pas du même bug rencontré en cours).
+
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">
